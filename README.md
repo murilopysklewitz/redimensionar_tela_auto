@@ -28,13 +28,6 @@ Bibliotecas:
 
 pip install pygetwindow keyboard screeninfo
 
-🗂️ Estrutura do Projeto
-📁 redimensionar_tela_auto/
- ├── redimensiona.py          # Script principal
- ├── README.md                # (opcional) Documentação do projeto
- ├── /dist                    # Pasta onde o .exe é gerado
- └── /build                   # Arquivos temporários do PyInstaller
-
 🚀 Como Executar o Script
 🔹 Opção 1: Rodar direto no Python
 
