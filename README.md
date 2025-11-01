@@ -1,53 +1,117 @@
-# Redimensionador de navegador
-## Objetivo
-criar um executavel que monitora meu navegador, quando a tela muda de resolução o navegador se centraliza sozinho
+🖥️ Script de Reposicionamento Automático do Opera GX
+📋 Descrição
 
-## Problema a resolver
-quando abro um programa em tela cheia o navegador na segunda tela se evade da tela e fica cortada
+Este script monitora continuamente a posição e o tamanho da janela do Opera GX e garante que ela permaneça totalmente visível e centralizada na segunda tela.
+Ele é especialmente útil em setups com duais monitores, onde a abertura de jogos em tela cheia na tela principal pode deslocar ou desalinhar janelas na segunda tela.
 
-## tecnologias utilizadas
-Python
-usei as bibliotecas pyinstaller, pyautogui, pygetwindow
+⚙️ Funcionalidades
 
-## minhas solução
-O script que desenvolvi age como um "vigilante" ele constantemente checa se a janela do Opera GX foi movida ou redimensionada e
- se isso acontecer, ele a força a voltar para a posição correta e a redimensiona.
+Detecta automaticamente todos os monitores conectados.
 
-<img width="1024" height="1536" alt="image" src="https://github.com/user-attachments/assets/437860f0-f56b-4b43-bfbf-195b1473d0cb" />
+Identifica a segunda tela e define suas dimensões e posição.
+
+Localiza a janela do Opera GX aberta.
+
+Move e redimensiona a janela para preencher 100% da segunda tela.
+
+Força o modo tela cheia (F11) do navegador.
+
+Monitora em tempo real e corrige automaticamente qualquer deslocamento.
+
+Pode ser convertido em .exe e executado em segundo plano.
+
+🧩 Requisitos
+
+Python 3.9+
+
+Bibliotecas:
+
+pip install pygetwindow keyboard screeninfo
+
+🗂️ Estrutura do Projeto
+📁 redimensionar_tela_auto/
+ ├── redimensiona.py          # Script principal
+ ├── README.md                # (opcional) Documentação do projeto
+ ├── /dist                    # Pasta onde o .exe é gerado
+ └── /build                   # Arquivos temporários do PyInstaller
+
+🚀 Como Executar o Script
+🔹 Opção 1: Rodar direto no Python
+
+Abra o terminal do Anaconda Prompt e execute:
+
+conda activate redimensiona_tela_auto_env
+cd "C:\Programação\projeto html, css javascript\redimensionar_tela_auto"
+python redimensiona.py
 
 
- ## como o Script Funciona na Prática
-Monitoramento: O script roda em segundo plano. A cada poucos segundos (time.sleep(10)), 
-ele verifica a posição e o tamanho da janela do Opera GX.
+O script iniciará um monitoramento contínuo, verificando a posição do Opera GX a cada 2 segundos.
 
-Detecção de Mudança: Ele compara a posição e o tamanho atuais da janela com os que deveriam
-estar na sua segunda tela (os valores de x, y, w e h que ele obteve no início).
+🧱 Geração do Executável (.exe)
 
-Correção Automática: Se ele detectar que a janela não está onde deveria, ele aciona a função de reposicionamento (reposicionar_opera_segunda_tela)
-para movê-la e redimensioná-la instantaneamente.
+Para criar um executável autônomo (sem depender do Python instalado):
 
-## como usá-lo em seu computador
+No terminal (Anaconda Prompt):
 
-O que você vai precisar
-Dois monitores configurados no seu computador.
+python -m PyInstaller --onefile --noconsole redimensiona.py
 
-O Opera GX instalado.
 
-Acesso à internet para baixar o aplicativo.
+O .exe será gerado na pasta:
 
-Passo 1: Baixar o Aplicativo
-Copie o repositorio do github
+dist/redimensiona.exe
 
-na pasta da aplicação vc encontrará uma pasta chamada build dentro dela um arquivo chamado Application.exe 
-Salve-o em uma pasta que você possa encontrar facilmente, como a sua área de trabalho ou a pasta Documentos.
 
-Passo 2: Usar o Aplicativo
-É muito simples. Basta dar um duplo clique no arquivo .exe que você baixou.
+Execute o arquivo normalmente para manter o Opera GX fixo na segunda tela.
 
-Se a janela do Opera GX for movida ou redimensionada, o aplicativo a forçará a voltar para a segunda tela.
+🪄 Execução Automática no Windows
 
-Para verificar se o aplicativo está rodando, abra o Gerenciador de Tarefas (Ctrl + Shift + Esc) e procure por Application.exe na lista de processos.
+Para que o script rode automaticamente sempre que o Windows iniciar:
 
-Passo 3: Parar o Aplicativo
-Para parar o monitoramento, basta usar o atalho ctrl + c ou fechar o terminal
-O aplicativo será encerrado, e a janela do Opera GX não será mais monitorada.
+Pressione Win + R e digite:
+
+shell:startup
+
+
+Copie o arquivo redimensiona.exe para essa pasta.
+
+Reinicie o computador.
+O script será iniciado automaticamente em segundo plano.
+
+🔍 Detalhes Técnicos
+
+Biblioteca screeninfo → obtém informações sobre cada monitor (posição e resolução).
+
+Biblioteca pygetwindow → localiza e manipula janelas abertas.
+
+Biblioteca keyboard → envia o atalho F11 para forçar o modo tela cheia.
+
+O loop principal verifica a janela a cada 2 segundos.
+Se detectar que ela saiu da posição ou foi redimensionada, a janela é reajustada imediatamente.
+
+⚠️ Limitações e Observações
+
+O script só funciona se o Opera GX já estiver aberto.
+
+Se a janela tiver outro título que não contenha "Opera GX", pode não ser detectada.
+
+O atalho F11 pode piscar a tela se o navegador já estiver em modo tela cheia.
+
+Caso queira apenas maximizar (sem F11), basta remover a linha:
+
+keyboard.press_and_release("f11")
+
+🧠 Ideias de Melhoria
+
+Adicionar suporte para detectar mais de duas telas e escolher qual usar.
+
+Criar um ícone na bandeja do sistema com pausa/retomada do monitoramento.
+
+Registrar logs em arquivo (.log) para diagnóstico de erros.
+
+Interface simples (GUI) para escolher o monitor e o intervalo de checagem.
+
+🪪 Autor
+
+Murilo Fuzikawa
+🧠 Projeto criado para manter o Opera GX fixo na segunda tela durante jogos em tela cheia.
+💻 Ambiente: Python + Anaconda + VS Code
